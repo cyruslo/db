@@ -2,7 +2,6 @@ package mysql
 
 import (
 	"log"
-	"rank/config"
 	"time"
 
 	"github.com/garyburd/redigo/redis"
@@ -10,16 +9,17 @@ import (
 
 var (
 	pool *redis.Pool
+	url string
 )
 
 // Startup 启动redis链接
 func Startup() {
-	pool = newPool(config.Params.RedisURL)
+	pool = newPool(/*config.Params.RedisURL*/url)
 
 	// ping
 	conn := pool.Get()
 	if conn != nil {
-		log.Printf("redis =>[%s] established.", config.Params.RedisURL)
+		log.Printf("redis =>[%s] established.", /*config.Params.RedisURL*/url)
 	}
 }
 
